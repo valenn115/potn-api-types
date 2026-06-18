@@ -4,44 +4,10 @@ All URIs are relative to *http://localhost:8080*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**auth_callback**](AuthApi.md#auth_callback) | **GET** /auth/{provider}/callback | OAuth callback
 [**auth_login**](AuthApi.md#auth_login) | **GET** /auth/{provider}/login | Start OAuth login
 [**auth_logout**](AuthApi.md#auth_logout) | **POST** /auth/logout | Log out the current device
 [**auth_refresh**](AuthApi.md#auth_refresh) | **POST** /auth/refresh | Exchange a refresh token for a new access/refresh token pair
 
-
-
-## auth_callback
-
-> auth_callback(provider, code, state, error)
-OAuth callback
-
-Handles the redirect back from Google/Microsoft, creates or links the user account, issues tokens, and redirects to the frontend with the tokens in the URL fragment.
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**provider** | **String** |  | [required] |
-**code** | Option<**String**> |  |  |
-**state** | Option<**String**> |  |  |
-**error** | Option<**String**> |  |  |
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/problem+json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
 ## auth_login

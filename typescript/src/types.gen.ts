@@ -381,37 +381,6 @@ export type AuthRefreshResponses = {
 
 export type AuthRefreshResponse = AuthRefreshResponses[keyof AuthRefreshResponses];
 
-export type AuthCallbackData = {
-    body?: never;
-    path: {
-        provider: 'google' | 'microsoft';
-    };
-    query?: {
-        code?: string;
-        state?: string;
-        error?: string;
-    };
-    url: '/auth/{provider}/callback';
-};
-
-export type AuthCallbackErrors = {
-    /**
-     * Error
-     */
-    default: ErrorModel;
-};
-
-export type AuthCallbackError = AuthCallbackErrors[keyof AuthCallbackErrors];
-
-export type AuthCallbackResponses = {
-    /**
-     * No Content
-     */
-    204: void;
-};
-
-export type AuthCallbackResponse = AuthCallbackResponses[keyof AuthCallbackResponses];
-
 export type AuthLoginData = {
     body?: never;
     path: {

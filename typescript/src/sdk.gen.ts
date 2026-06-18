@@ -2,7 +2,7 @@
 
 import type { Client, ClientMeta, Options as Options2, RequestResult, TDataShape } from './client';
 import { client } from './client.gen';
-import type { AuthCallbackData, AuthCallbackErrors, AuthCallbackResponses, AuthLoginData, AuthLoginErrors, AuthLoginResponses, AuthLogoutData, AuthLogoutErrors, AuthLogoutResponses, AuthRefreshData, AuthRefreshErrors, AuthRefreshResponses, ConfirmInstanceUploadData, ConfirmInstanceUploadErrors, ConfirmInstanceUploadResponses, CreateInstanceData, CreateInstanceDownloadUrlData, CreateInstanceDownloadUrlErrors, CreateInstanceDownloadUrlResponses, CreateInstanceErrors, CreateInstanceResponses, CreateInstanceUploadUrlData, CreateInstanceUploadUrlErrors, CreateInstanceUploadUrlResponses, DeleteInstanceData, DeleteInstanceErrors, DeleteInstanceResponses, GetInstanceData, GetInstanceErrors, GetInstanceResponses, GetMeData, GetMeErrors, GetMeResponses, GetSettingsData, GetSettingsErrors, GetSettingsResponses, ListInstancesData, ListInstancesErrors, ListInstancesResponses, PutSettingsData, PutSettingsErrors, PutSettingsResponses, UpdateInstanceData, UpdateInstanceErrors, UpdateInstanceResponses } from './types.gen';
+import type { AuthLoginData, AuthLoginErrors, AuthLoginResponses, AuthLogoutData, AuthLogoutErrors, AuthLogoutResponses, AuthRefreshData, AuthRefreshErrors, AuthRefreshResponses, ConfirmInstanceUploadData, ConfirmInstanceUploadErrors, ConfirmInstanceUploadResponses, CreateInstanceData, CreateInstanceDownloadUrlData, CreateInstanceDownloadUrlErrors, CreateInstanceDownloadUrlResponses, CreateInstanceErrors, CreateInstanceResponses, CreateInstanceUploadUrlData, CreateInstanceUploadUrlErrors, CreateInstanceUploadUrlResponses, DeleteInstanceData, DeleteInstanceErrors, DeleteInstanceResponses, GetInstanceData, GetInstanceErrors, GetInstanceResponses, GetMeData, GetMeErrors, GetMeResponses, GetSettingsData, GetSettingsErrors, GetSettingsResponses, ListInstancesData, ListInstancesErrors, ListInstancesResponses, PutSettingsData, PutSettingsErrors, PutSettingsResponses, UpdateInstanceData, UpdateInstanceErrors, UpdateInstanceResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -45,13 +45,6 @@ export const authRefresh = <ThrowOnError extends boolean = false>(options: Optio
         ...options.headers
     }
 });
-
-/**
- * OAuth callback
- *
- * Handles the redirect back from Google/Microsoft, creates or links the user account, issues tokens, and redirects to the frontend with the tokens in the URL fragment.
- */
-export const authCallback = <ThrowOnError extends boolean = false>(options: Options<AuthCallbackData, ThrowOnError>): RequestResult<AuthCallbackResponses, AuthCallbackErrors, ThrowOnError> => (options.client ?? client).get<AuthCallbackResponses, AuthCallbackErrors, ThrowOnError>({ url: '/auth/{provider}/callback', ...options });
 
 /**
  * Start OAuth login

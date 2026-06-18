@@ -15,14 +15,6 @@ use crate::{apis::ResponseContent, models};
 use super::{Error, configuration, ContentType};
 
 
-/// struct for typed errors of method [`auth_callback`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum AuthCallbackError {
-    DefaultResponse(models::ErrorModel),
-    UnknownValue(serde_json::Value),
-}
-
 /// struct for typed errors of method [`auth_login`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -47,44 +39,6 @@ pub enum AuthRefreshError {
     UnknownValue(serde_json::Value),
 }
 
-
-/// Handles the redirect back from Google/Microsoft, creates or links the user account, issues tokens, and redirects to the frontend with the tokens in the URL fragment.
-pub async fn auth_callback(configuration: &configuration::Configuration, provider: &str, code: Option<&str>, state: Option<&str>, error: Option<&str>) -> Result<(), Error<AuthCallbackError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_path_provider = provider;
-    let p_query_code = code;
-    let p_query_state = state;
-    let p_query_error = error;
-
-    let uri_str = format!("{}/auth/{provider}/callback", configuration.base_path, provider=crate::apis::urlencode(p_path_provider));
-    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
-
-    if let Some(ref param_value) = p_query_code {
-        req_builder = req_builder.query(&[("code", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_query_state {
-        req_builder = req_builder.query(&[("state", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_query_error {
-        req_builder = req_builder.query(&[("error", &param_value.to_string())]);
-    }
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-
-    if !status.is_client_error() && !status.is_server_error() {
-        Ok(())
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<AuthCallbackError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
 
 /// Redirects the user's browser to Google or Microsoft to begin the login flow.
 pub async fn auth_login(configuration: &configuration::Configuration, provider: &str, caller: Option<&str>) -> Result<(), Error<AuthLoginError>> {

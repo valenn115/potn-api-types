@@ -2,9 +2,7 @@
   "name": "@potn/api-types",
   "version": "2026.6.18",
   "description": "Generated POTN API types and client",
-  "main": "./typescript/src/index.ts",
-  "types": "./typescript/src/index.ts",
-  "exports": {
-    ".": "./typescript/src/index.ts"
-  }
+  "main": "./typescript/dist/index.js",
+  "types": "./typescript/dist/types/index.d.ts",
+  "module": "./typescript/dist/index.js"
 }

@@ -1,0 +1,612 @@
+export type ClientOptions = {
+    baseUrl: 'http://localhost:8080' | (string & {});
+};
+export type ErrorDetail = {
+    /**
+     * Where the error occurred, e.g. 'body.items[3].tags' or 'path.thing-id'
+     */
+    location?: string;
+    /**
+     * Error message text
+     */
+    message?: string;
+    /**
+     * The value at the given location
+     */
+    value?: unknown;
+};
+export type ErrorModel = {
+    /**
+     * A URL to the JSON Schema for this object.
+     */
+    readonly $schema?: string;
+    /**
+     * A human-readable explanation specific to this occurrence of the problem.
+     */
+    detail?: string;
+    /**
+     * Optional list of individual error details
+     */
+    errors?: Array<ErrorDetail> | null;
+    /**
+     * A URI reference that identifies the specific occurrence of the problem.
+     */
+    instance?: string;
+    /**
+     * HTTP status code
+     */
+    status?: number;
+    /**
+     * A short, human-readable summary of the problem type. This value should not change between occurrences of the error.
+     */
+    title?: string;
+    /**
+     * A URI reference to human-readable documentation for the error.
+     */
+    type?: string;
+};
+export type InstanceBody = {
+    /**
+     * A URL to the JSON Schema for this object.
+     */
+    readonly $schema?: string;
+    /**
+     * Free-form instance settings (jvm args, mods, etc)
+     */
+    config?: unknown;
+    /**
+     * Minecraft version, e.g. '1.20.1'
+     */
+    mc_version: string;
+    mod_loader: 'vanilla' | 'forge' | 'neoforge' | 'fabric' | 'quilt';
+    /**
+     * Loader version, empty for vanilla
+     */
+    mod_loader_version?: string;
+    /**
+     * Display name shown in the launcher
+     */
+    name: string;
+};
+export type InstanceResponse = {
+    /**
+     * A URL to the JSON Schema for this object.
+     */
+    readonly $schema?: string;
+    config: unknown;
+    created_at: string;
+    /**
+     * Whether a packaged archive exists in object storage for this instance
+     */
+    has_upload: boolean;
+    id: string;
+    mc_version: string;
+    mod_loader: string;
+    mod_loader_version: string;
+    name: string;
+    updated_at: string;
+};
+export type ListOutputBody = {
+    /**
+     * A URL to the JSON Schema for this object.
+     */
+    readonly $schema?: string;
+    instances: Array<InstanceResponse> | null;
+    /**
+     * Current server time - store this and pass it as 'since' on the next sync
+     */
+    server_now: string;
+};
+export type LogoutInputBody = {
+    /**
+     * A URL to the JSON Schema for this object.
+     */
+    readonly $schema?: string;
+    /**
+     * The refresh token of the session (device) to log out
+     */
+    refresh_token: string;
+};
+export type LogoutOutputBody = {
+    /**
+     * A URL to the JSON Schema for this object.
+     */
+    readonly $schema?: string;
+    success: boolean;
+};
+export type PresignOutputBody = {
+    /**
+     * A URL to the JSON Schema for this object.
+     */
+    readonly $schema?: string;
+    expires_at: string;
+    url: string;
+};
+export type PutInputBody = {
+    /**
+     * A URL to the JSON Schema for this object.
+     */
+    readonly $schema?: string;
+    /**
+     * Free-form launcher settings object - replaces the entire stored object
+     */
+    data: unknown;
+};
+export type RefreshInputBody = {
+    /**
+     * A URL to the JSON Schema for this object.
+     */
+    readonly $schema?: string;
+    /**
+     * The refresh token previously issued to this device
+     */
+    refresh_token: string;
+};
+export type SettingsBody = {
+    /**
+     * A URL to the JSON Schema for this object.
+     */
+    readonly $schema?: string;
+    /**
+     * Free-form launcher settings object
+     */
+    data: unknown;
+    updated_at: string;
+};
+export type TokenPair = {
+    /**
+     * A URL to the JSON Schema for this object.
+     */
+    readonly $schema?: string;
+    /**
+     * Short-lived JWT, send as 'Authorization: Bearer <token>'
+     */
+    access_token: string;
+    /**
+     * Access token lifetime in seconds
+     */
+    expires_in: number;
+    /**
+     * Long-lived opaque token, used to obtain new access tokens
+     */
+    refresh_token: string;
+};
+export type User = {
+    /**
+     * A URL to the JSON Schema for this object.
+     */
+    readonly $schema?: string;
+    avatar_url?: string;
+    created_at: string;
+    display_name: string;
+    email: string;
+    id: string;
+    updated_at: string;
+};
+export type ErrorModelWritable = {
+    /**
+     * A human-readable explanation specific to this occurrence of the problem.
+     */
+    detail?: string;
+    /**
+     * Optional list of individual error details
+     */
+    errors?: Array<ErrorDetail> | null;
+    /**
+     * A URI reference that identifies the specific occurrence of the problem.
+     */
+    instance?: string;
+    /**
+     * HTTP status code
+     */
+    status?: number;
+    /**
+     * A short, human-readable summary of the problem type. This value should not change between occurrences of the error.
+     */
+    title?: string;
+    /**
+     * A URI reference to human-readable documentation for the error.
+     */
+    type?: string;
+};
+export type InstanceBodyWritable = {
+    /**
+     * Free-form instance settings (jvm args, mods, etc)
+     */
+    config?: unknown;
+    /**
+     * Minecraft version, e.g. '1.20.1'
+     */
+    mc_version: string;
+    mod_loader: 'vanilla' | 'forge' | 'neoforge' | 'fabric' | 'quilt';
+    /**
+     * Loader version, empty for vanilla
+     */
+    mod_loader_version?: string;
+    /**
+     * Display name shown in the launcher
+     */
+    name: string;
+};
+export type InstanceResponseWritable = {
+    config: unknown;
+    created_at: string;
+    /**
+     * Whether a packaged archive exists in object storage for this instance
+     */
+    has_upload: boolean;
+    id: string;
+    mc_version: string;
+    mod_loader: string;
+    mod_loader_version: string;
+    name: string;
+    updated_at: string;
+};
+export type ListOutputBodyWritable = {
+    instances: Array<InstanceResponseWritable> | null;
+    /**
+     * Current server time - store this and pass it as 'since' on the next sync
+     */
+    server_now: string;
+};
+export type LogoutInputBodyWritable = {
+    /**
+     * The refresh token of the session (device) to log out
+     */
+    refresh_token: string;
+};
+export type LogoutOutputBodyWritable = {
+    success: boolean;
+};
+export type PresignOutputBodyWritable = {
+    expires_at: string;
+    url: string;
+};
+export type PutInputBodyWritable = {
+    /**
+     * Free-form launcher settings object - replaces the entire stored object
+     */
+    data: unknown;
+};
+export type RefreshInputBodyWritable = {
+    /**
+     * The refresh token previously issued to this device
+     */
+    refresh_token: string;
+};
+export type SettingsBodyWritable = {
+    /**
+     * Free-form launcher settings object
+     */
+    data: unknown;
+    updated_at: string;
+};
+export type TokenPairWritable = {
+    /**
+     * Short-lived JWT, send as 'Authorization: Bearer <token>'
+     */
+    access_token: string;
+    /**
+     * Access token lifetime in seconds
+     */
+    expires_in: number;
+    /**
+     * Long-lived opaque token, used to obtain new access tokens
+     */
+    refresh_token: string;
+};
+export type UserWritable = {
+    avatar_url?: string;
+    created_at: string;
+    display_name: string;
+    email: string;
+    id: string;
+    updated_at: string;
+};
+export type AuthLogoutData = {
+    body: LogoutInputBodyWritable;
+    path?: never;
+    query?: never;
+    url: '/auth/logout';
+};
+export type AuthLogoutErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type AuthLogoutError = AuthLogoutErrors[keyof AuthLogoutErrors];
+export type AuthLogoutResponses = {
+    /**
+     * OK
+     */
+    200: LogoutOutputBody;
+};
+export type AuthLogoutResponse = AuthLogoutResponses[keyof AuthLogoutResponses];
+export type AuthRefreshData = {
+    body: RefreshInputBodyWritable;
+    path?: never;
+    query?: never;
+    url: '/auth/refresh';
+};
+export type AuthRefreshErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type AuthRefreshError = AuthRefreshErrors[keyof AuthRefreshErrors];
+export type AuthRefreshResponses = {
+    /**
+     * OK
+     */
+    200: TokenPair;
+};
+export type AuthRefreshResponse = AuthRefreshResponses[keyof AuthRefreshResponses];
+export type AuthLoginData = {
+    body?: never;
+    path: {
+        /**
+         * OAuth provider to log in with
+         */
+        provider: 'google' | 'microsoft';
+    };
+    query?: {
+        /**
+         * URL to redirect back to after login
+         */
+        caller?: 'web' | 'launcher';
+    };
+    url: '/auth/{provider}/login';
+};
+export type AuthLoginErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type AuthLoginError = AuthLoginErrors[keyof AuthLoginErrors];
+export type AuthLoginResponses = {
+    /**
+     * No Content
+     */
+    204: void;
+};
+export type AuthLoginResponse = AuthLoginResponses[keyof AuthLoginResponses];
+export type ListInstancesData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * RFC3339 timestamp; only return instances updated after this time
+         */
+        since?: string;
+    };
+    url: '/instances';
+};
+export type ListInstancesErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type ListInstancesError = ListInstancesErrors[keyof ListInstancesErrors];
+export type ListInstancesResponses = {
+    /**
+     * OK
+     */
+    200: ListOutputBody;
+};
+export type ListInstancesResponse = ListInstancesResponses[keyof ListInstancesResponses];
+export type CreateInstanceData = {
+    body: InstanceBodyWritable;
+    path?: never;
+    query?: never;
+    url: '/instances';
+};
+export type CreateInstanceErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type CreateInstanceError = CreateInstanceErrors[keyof CreateInstanceErrors];
+export type CreateInstanceResponses = {
+    /**
+     * OK
+     */
+    200: InstanceResponse;
+};
+export type CreateInstanceResponse = CreateInstanceResponses[keyof CreateInstanceResponses];
+export type DeleteInstanceData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/instances/{id}';
+};
+export type DeleteInstanceErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type DeleteInstanceError = DeleteInstanceErrors[keyof DeleteInstanceErrors];
+export type DeleteInstanceResponses = {
+    /**
+     * No Content
+     */
+    204: void;
+};
+export type DeleteInstanceResponse = DeleteInstanceResponses[keyof DeleteInstanceResponses];
+export type GetInstanceData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/instances/{id}';
+};
+export type GetInstanceErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type GetInstanceError = GetInstanceErrors[keyof GetInstanceErrors];
+export type GetInstanceResponses = {
+    /**
+     * OK
+     */
+    200: InstanceResponse;
+};
+export type GetInstanceResponse = GetInstanceResponses[keyof GetInstanceResponses];
+export type UpdateInstanceData = {
+    body: InstanceBodyWritable;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/instances/{id}';
+};
+export type UpdateInstanceErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type UpdateInstanceError = UpdateInstanceErrors[keyof UpdateInstanceErrors];
+export type UpdateInstanceResponses = {
+    /**
+     * OK
+     */
+    200: InstanceResponse;
+};
+export type UpdateInstanceResponse = UpdateInstanceResponses[keyof UpdateInstanceResponses];
+export type ConfirmInstanceUploadData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/instances/{id}/confirm-upload';
+};
+export type ConfirmInstanceUploadErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type ConfirmInstanceUploadError = ConfirmInstanceUploadErrors[keyof ConfirmInstanceUploadErrors];
+export type ConfirmInstanceUploadResponses = {
+    /**
+     * OK
+     */
+    200: InstanceResponse;
+};
+export type ConfirmInstanceUploadResponse = ConfirmInstanceUploadResponses[keyof ConfirmInstanceUploadResponses];
+export type CreateInstanceDownloadUrlData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/instances/{id}/download-url';
+};
+export type CreateInstanceDownloadUrlErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type CreateInstanceDownloadUrlError = CreateInstanceDownloadUrlErrors[keyof CreateInstanceDownloadUrlErrors];
+export type CreateInstanceDownloadUrlResponses = {
+    /**
+     * OK
+     */
+    200: PresignOutputBody;
+};
+export type CreateInstanceDownloadUrlResponse = CreateInstanceDownloadUrlResponses[keyof CreateInstanceDownloadUrlResponses];
+export type CreateInstanceUploadUrlData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/instances/{id}/upload-url';
+};
+export type CreateInstanceUploadUrlErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type CreateInstanceUploadUrlError = CreateInstanceUploadUrlErrors[keyof CreateInstanceUploadUrlErrors];
+export type CreateInstanceUploadUrlResponses = {
+    /**
+     * OK
+     */
+    200: PresignOutputBody;
+};
+export type CreateInstanceUploadUrlResponse = CreateInstanceUploadUrlResponses[keyof CreateInstanceUploadUrlResponses];
+export type GetMeData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/me';
+};
+export type GetMeErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type GetMeError = GetMeErrors[keyof GetMeErrors];
+export type GetMeResponses = {
+    /**
+     * OK
+     */
+    200: User;
+};
+export type GetMeResponse = GetMeResponses[keyof GetMeResponses];
+export type GetSettingsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/settings';
+};
+export type GetSettingsErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type GetSettingsError = GetSettingsErrors[keyof GetSettingsErrors];
+export type GetSettingsResponses = {
+    /**
+     * OK
+     */
+    200: SettingsBody;
+};
+export type GetSettingsResponse = GetSettingsResponses[keyof GetSettingsResponses];
+export type PutSettingsData = {
+    body: PutInputBodyWritable;
+    path?: never;
+    query?: never;
+    url: '/settings';
+};
+export type PutSettingsErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type PutSettingsError = PutSettingsErrors[keyof PutSettingsErrors];
+export type PutSettingsResponses = {
+    /**
+     * OK
+     */
+    200: SettingsBody;
+};
+export type PutSettingsResponse = PutSettingsResponses[keyof PutSettingsResponses];

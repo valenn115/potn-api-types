@@ -26,7 +26,6 @@ All URIs are relative to *http://localhost:8080*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AuthApi* | [**auth_callback**](docs/AuthApi.md#auth_callback) | **GET** /auth/{provider}/callback | OAuth callback
 *AuthApi* | [**auth_login**](docs/AuthApi.md#auth_login) | **GET** /auth/{provider}/login | Start OAuth login
 *AuthApi* | [**auth_logout**](docs/AuthApi.md#auth_logout) | **POST** /auth/logout | Log out the current device
 *AuthApi* | [**auth_refresh**](docs/AuthApi.md#auth_refresh) | **POST** /auth/refresh | Exchange a refresh token for a new access/refresh token pair
