@@ -46,7 +46,7 @@ No authorization required
 > models::LogoutOutputBody auth_logout(logout_input_body)
 Log out the current device
 
-Deletes the session associated with the given refresh token. The access token remains valid until it expires (it's stateless), but the refresh token can no longer be used.
+Deletes the session associated with the given refresh token. The access token remains valid until it expires, but the refresh token can no longer be used.
 
 ### Parameters
 

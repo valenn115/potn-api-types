@@ -21,8 +21,8 @@ pub struct InstanceBody {
     /// Minecraft version, e.g. '1.20.1'
     #[serde(rename = "mc_version")]
     pub mc_version: String,
-    #[serde(rename = "mod_loader")]
-    pub mod_loader: ModLoader,
+    #[serde(rename = "mod_loader", skip_serializing_if = "Option::is_none")]
+    pub mod_loader: Option<ModLoader>,
     /// Loader version, empty for vanilla
     #[serde(rename = "mod_loader_version", skip_serializing_if = "Option::is_none")]
     pub mod_loader_version: Option<String>,
@@ -32,12 +32,12 @@ pub struct InstanceBody {
 }
 
 impl InstanceBody {
-    pub fn new(mc_version: String, mod_loader: ModLoader, name: String) -> InstanceBody {
+    pub fn new(mc_version: String, name: String) -> InstanceBody {
         InstanceBody {
             dollar_schema: None,
             config: None,
             mc_version,
-            mod_loader,
+            mod_loader: None,
             mod_loader_version: None,
             name,
         }
@@ -46,8 +46,6 @@ impl InstanceBody {
 /// 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum ModLoader {
-    #[serde(rename = "vanilla")]
-    Vanilla,
     #[serde(rename = "forge")]
     Forge,
     #[serde(rename = "neoforge")]
@@ -60,7 +58,7 @@ pub enum ModLoader {
 
 impl Default for ModLoader {
     fn default() -> ModLoader {
-        Self::Vanilla
+        Self::Forge
     }
 }
 

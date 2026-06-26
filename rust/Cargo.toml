@@ -1,6 +1,6 @@
 [package]
 name = "potn-api"
-version = "2026.6.18"
+version = "2026.6.26"
 authors = ["OpenAPI Generator team and contributors"]
 description = "Backend API for the POTN Minecraft launcher: authentication, instance sync, and settings sync."
 # Override this license by providing a License Object in the OpenAPI.

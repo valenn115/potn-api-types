@@ -3,7 +3,7 @@ import { client } from './client.gen';
 /**
  * Log out the current device
  *
- * Deletes the session associated with the given refresh token. The access token remains valid until it expires (it's stateless), but the refresh token can no longer be used.
+ * Deletes the session associated with the given refresh token. The access token remains valid until it expires, but the refresh token can no longer be used.
  */
 export const authLogout = (options) => (options.client ?? client).post({
     url: '/auth/logout',

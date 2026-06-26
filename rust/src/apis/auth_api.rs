@@ -70,7 +70,7 @@ pub async fn auth_login(configuration: &configuration::Configuration, provider: 
     }
 }
 
-/// Deletes the session associated with the given refresh token. The access token remains valid until it expires (it's stateless), but the refresh token can no longer be used.
+/// Deletes the session associated with the given refresh token. The access token remains valid until it expires, but the refresh token can no longer be used.
 pub async fn auth_logout(configuration: &configuration::Configuration, logout_input_body: models::LogoutInputBody) -> Result<models::LogoutOutputBody, Error<AuthLogoutError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_body_logout_input_body = logout_input_body;

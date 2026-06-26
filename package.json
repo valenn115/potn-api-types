@@ -1,6 +1,6 @@
 {
   "name": "@potn/api-types",
-  "version": "2026.6.18",
+  "version": "2026.6.26",
   "description": "Generated POTN API types and client",
   "main": "./typescript/dist/index.js",
   "types": "./typescript/dist/types/index.d.ts",

@@ -21,7 +21,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 /**
  * Log out the current device
  *
- * Deletes the session associated with the given refresh token. The access token remains valid until it expires (it's stateless), but the refresh token can no longer be used.
+ * Deletes the session associated with the given refresh token. The access token remains valid until it expires, but the refresh token can no longer be used.
  */
 export const authLogout = <ThrowOnError extends boolean = false>(options: Options<AuthLogoutData, ThrowOnError>): RequestResult<AuthLogoutResponses, AuthLogoutErrors, ThrowOnError> => (options.client ?? client).post<AuthLogoutResponses, AuthLogoutErrors, ThrowOnError>({
     url: '/auth/logout',

@@ -58,7 +58,7 @@ export type InstanceBody = {
      * Minecraft version, e.g. '1.20.1'
      */
     mc_version: string;
-    mod_loader: 'vanilla' | 'forge' | 'neoforge' | 'fabric' | 'quilt';
+    mod_loader?: 'forge' | 'neoforge' | 'fabric' | 'quilt';
     /**
      * Loader version, empty for vanilla
      */
@@ -218,7 +218,7 @@ export type InstanceBodyWritable = {
      * Minecraft version, e.g. '1.20.1'
      */
     mc_version: string;
-    mod_loader: 'vanilla' | 'forge' | 'neoforge' | 'fabric' | 'quilt';
+    mod_loader?: 'forge' | 'neoforge' | 'fabric' | 'quilt';
     /**
      * Loader version, empty for vanilla
      */
