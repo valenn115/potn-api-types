@@ -2,7 +2,7 @@
 
 import type { Client, ClientMeta, Options as Options2, RequestResult, TDataShape } from './client';
 import { client } from './client.gen';
-import type { AuthLoginData, AuthLoginErrors, AuthLoginResponses, AuthLogoutData, AuthLogoutErrors, AuthLogoutResponses, AuthRefreshData, AuthRefreshErrors, AuthRefreshResponses, ConfirmInstanceUploadData, ConfirmInstanceUploadErrors, ConfirmInstanceUploadResponses, CreateInstanceData, CreateInstanceDownloadUrlData, CreateInstanceDownloadUrlErrors, CreateInstanceDownloadUrlResponses, CreateInstanceErrors, CreateInstanceResponses, CreateInstanceUploadUrlData, CreateInstanceUploadUrlErrors, CreateInstanceUploadUrlResponses, DeleteInstanceData, DeleteInstanceErrors, DeleteInstanceResponses, GetInstanceData, GetInstanceErrors, GetInstanceResponses, GetMeData, GetMeErrors, GetMeResponses, GetSettingsData, GetSettingsErrors, GetSettingsResponses, ListInstancesData, ListInstancesErrors, ListInstancesResponses, PutSettingsData, PutSettingsErrors, PutSettingsResponses, UpdateInstanceData, UpdateInstanceErrors, UpdateInstanceResponses } from './types.gen';
+import type { AuthLoginData, AuthLoginErrors, AuthLoginResponses, AuthLogoutData, AuthLogoutErrors, AuthLogoutResponses, AuthRefreshData, AuthRefreshErrors, AuthRefreshResponses, ConfirmInstanceUploadData, ConfirmInstanceUploadErrors, ConfirmInstanceUploadResponses, CreateInstanceData, CreateInstanceDownloadUrlData, CreateInstanceDownloadUrlErrors, CreateInstanceDownloadUrlResponses, CreateInstanceErrors, CreateInstanceResponses, CreateInstanceUploadUrlData, CreateInstanceUploadUrlErrors, CreateInstanceUploadUrlResponses, DeleteInstanceData, DeleteInstanceErrors, DeleteInstanceResponses, GetInstanceData, GetInstanceErrors, GetInstanceResponses, GetMeData, GetMeErrors, GetMeResponses, GetMinecraftAccountData, GetMinecraftAccountErrors, GetMinecraftAccountResponses, GetMinecraftAccountsData, GetMinecraftAccountsErrors, GetMinecraftAccountsResponses, GetSettingsData, GetSettingsErrors, GetSettingsResponses, ListInstancesData, ListInstancesErrors, ListInstancesResponses, MinecraftLinkCallbackData, MinecraftLinkCallbackErrors, MinecraftLinkCallbackResponses, MinecraftLinkData, MinecraftLinkErrors, MinecraftLinkResponses, MinecraftRefreshTokenData, MinecraftRefreshTokenErrors, MinecraftRefreshTokenResponses, PutSettingsData, PutSettingsErrors, PutSettingsResponses, UnlinkMinecraftAccountData, UnlinkMinecraftAccountErrors, UnlinkMinecraftAccountResponses, UpdateInstanceData, UpdateInstanceErrors, UpdateInstanceResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -49,7 +49,7 @@ export const authRefresh = <ThrowOnError extends boolean = false>(options: Optio
 /**
  * Start OAuth login
  *
- * Redirects the user's browser to Google or Microsoft to begin the login flow.
+ * Redirects the user's browser to begin the login flow.
  */
 export const authLogin = <ThrowOnError extends boolean = false>(options: Options<AuthLoginData, ThrowOnError>): RequestResult<AuthLoginResponses, AuthLoginErrors, ThrowOnError> => (options.client ?? client).get<AuthLoginResponses, AuthLoginErrors, ThrowOnError>({ url: '/auth/{provider}/login', ...options });
 
@@ -143,6 +143,68 @@ export const getMe = <ThrowOnError extends boolean = false>(options?: Options<Ge
     url: '/me',
     ...options
 });
+
+/**
+ * Unlink minecraft account
+ *
+ * Unlinks minecraft account from the current user
+ */
+export const unlinkMinecraftAccount = <ThrowOnError extends boolean = false>(options: Options<UnlinkMinecraftAccountData, ThrowOnError>): RequestResult<UnlinkMinecraftAccountResponses, UnlinkMinecraftAccountErrors, ThrowOnError> => (options.client ?? client).delete<UnlinkMinecraftAccountResponses, UnlinkMinecraftAccountErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/minecraft/account',
+    ...options
+});
+
+/**
+ * Get minecraft account
+ *
+ * Returns a minecraft account linked to the current user
+ */
+export const getMinecraftAccount = <ThrowOnError extends boolean = false>(options: Options<GetMinecraftAccountData, ThrowOnError>): RequestResult<GetMinecraftAccountResponses, GetMinecraftAccountErrors, ThrowOnError> => (options.client ?? client).get<GetMinecraftAccountResponses, GetMinecraftAccountErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/minecraft/account',
+    ...options
+});
+
+/**
+ * Link minecraft account
+ *
+ * Links minecraft account to current user using microsoft oauth
+ */
+export const minecraftLink = <ThrowOnError extends boolean = false>(options?: Options<MinecraftLinkData, ThrowOnError>): RequestResult<MinecraftLinkResponses, MinecraftLinkErrors, ThrowOnError> => (options?.client ?? client).post<MinecraftLinkResponses, MinecraftLinkErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/minecraft/account/link',
+    ...options
+});
+
+/**
+ * Refresh minecraft access token
+ *
+ * Refreshes the minecraft access token for the current user
+ */
+export const minecraftRefreshToken = <ThrowOnError extends boolean = false>(options: Options<MinecraftRefreshTokenData, ThrowOnError>): RequestResult<MinecraftRefreshTokenResponses, MinecraftRefreshTokenErrors, ThrowOnError> => (options.client ?? client).get<MinecraftRefreshTokenResponses, MinecraftRefreshTokenErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/minecraft/account/refresh',
+    ...options
+});
+
+/**
+ * Get minecraft accounts
+ *
+ * Returns a list of minecraft accounts linked to the current user
+ */
+export const getMinecraftAccounts = <ThrowOnError extends boolean = false>(options?: Options<GetMinecraftAccountsData, ThrowOnError>): RequestResult<GetMinecraftAccountsResponses, GetMinecraftAccountsErrors, ThrowOnError> => (options?.client ?? client).get<GetMinecraftAccountsResponses, GetMinecraftAccountsErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/minecraft/accounts',
+    ...options
+});
+
+/**
+ * Minecraft link callback
+ *
+ * Handles redirect from microsoft to obrain tokens
+ */
+export const minecraftLinkCallback = <ThrowOnError extends boolean = false>(options?: Options<MinecraftLinkCallbackData, ThrowOnError>): RequestResult<MinecraftLinkCallbackResponses, MinecraftLinkCallbackErrors, ThrowOnError> => (options?.client ?? client).get<MinecraftLinkCallbackResponses, MinecraftLinkCallbackErrors, ThrowOnError>({ url: '/minecraft/link/callback', ...options });
 
 /**
  * Get the current user's synced settings

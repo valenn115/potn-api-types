@@ -29,7 +29,7 @@ export const authRefresh = (options) => (options.client ?? client).post({
 /**
  * Start OAuth login
  *
- * Redirects the user's browser to Google or Microsoft to begin the login flow.
+ * Redirects the user's browser to begin the login flow.
  */
 export const authLogin = (options) => (options.client ?? client).get({ url: '/auth/{provider}/login', ...options });
 /**
@@ -114,6 +114,62 @@ export const getMe = (options) => (options?.client ?? client).get({
     url: '/me',
     ...options
 });
+/**
+ * Unlink minecraft account
+ *
+ * Unlinks minecraft account from the current user
+ */
+export const unlinkMinecraftAccount = (options) => (options.client ?? client).delete({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/minecraft/account',
+    ...options
+});
+/**
+ * Get minecraft account
+ *
+ * Returns a minecraft account linked to the current user
+ */
+export const getMinecraftAccount = (options) => (options.client ?? client).get({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/minecraft/account',
+    ...options
+});
+/**
+ * Link minecraft account
+ *
+ * Links minecraft account to current user using microsoft oauth
+ */
+export const minecraftLink = (options) => (options?.client ?? client).post({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/minecraft/account/link',
+    ...options
+});
+/**
+ * Refresh minecraft access token
+ *
+ * Refreshes the minecraft access token for the current user
+ */
+export const minecraftRefreshToken = (options) => (options.client ?? client).get({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/minecraft/account/refresh',
+    ...options
+});
+/**
+ * Get minecraft accounts
+ *
+ * Returns a list of minecraft accounts linked to the current user
+ */
+export const getMinecraftAccounts = (options) => (options?.client ?? client).get({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/minecraft/accounts',
+    ...options
+});
+/**
+ * Minecraft link callback
+ *
+ * Handles redirect from microsoft to obrain tokens
+ */
+export const minecraftLinkCallback = (options) => (options?.client ?? client).get({ url: '/minecraft/link/callback', ...options });
 /**
  * Get the current user's synced settings
  *

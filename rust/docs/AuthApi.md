@@ -1,6 +1,6 @@
 # \AuthApi
 
-All URIs are relative to *http://localhost:8080*
+All URIs are relative to *https://api.potnlaunch.xyz*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -12,10 +12,10 @@ Method | HTTP request | Description
 
 ## auth_login
 
-> auth_login(provider, caller)
+> auth_login(provider, caller, user_agent, x_real_ip)
 Start OAuth login
 
-Redirects the user's browser to Google or Microsoft to begin the login flow.
+Redirects the user's browser to begin the login flow.
 
 ### Parameters
 
@@ -24,6 +24,8 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **provider** | **String** | OAuth provider to log in with | [required] |
 **caller** | Option<**String**> | URL to redirect back to after login |  |
+**user_agent** | Option<**String**> | User agent string |  |
+**x_real_ip** | Option<**String**> | IP address of the user |  |
 
 ### Return type
 

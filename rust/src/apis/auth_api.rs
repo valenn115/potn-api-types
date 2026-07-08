@@ -40,11 +40,13 @@ pub enum AuthRefreshError {
 }
 
 
-/// Redirects the user's browser to Google or Microsoft to begin the login flow.
-pub async fn auth_login(configuration: &configuration::Configuration, provider: &str, caller: Option<&str>) -> Result<(), Error<AuthLoginError>> {
+/// Redirects the user's browser to begin the login flow.
+pub async fn auth_login(configuration: &configuration::Configuration, provider: &str, caller: Option<&str>, user_agent: Option<&str>, x_real_ip: Option<&str>) -> Result<(), Error<AuthLoginError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_provider = provider;
     let p_query_caller = caller;
+    let p_header_user_agent = user_agent;
+    let p_header_x_real_ip = x_real_ip;
 
     let uri_str = format!("{}/auth/{provider}/login", configuration.base_path, provider=crate::apis::urlencode(p_path_provider));
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -54,6 +56,12 @@ pub async fn auth_login(configuration: &configuration::Configuration, provider: 
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(param_value) = p_header_user_agent {
+        req_builder = req_builder.header("User-Agent", param_value.to_string());
+    }
+    if let Some(param_value) = p_header_x_real_ip {
+        req_builder = req_builder.header("X-Real-IP", param_value.to_string());
     }
 
     let req = req_builder.build()?;

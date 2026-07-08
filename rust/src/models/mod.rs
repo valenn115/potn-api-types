@@ -12,6 +12,8 @@ pub mod logout_input_body;
 pub use self::logout_input_body::LogoutInputBody;
 pub mod logout_output_body;
 pub use self::logout_output_body::LogoutOutputBody;
+pub mod minecraft_account;
+pub use self::minecraft_account::MinecraftAccount;
 pub mod presign_output_body;
 pub use self::presign_output_body::PresignOutputBody;
 pub mod put_input_body;

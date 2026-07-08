@@ -1,5 +1,5 @@
 import type { Client, ClientMeta, Options as Options2, RequestResult, TDataShape } from './client';
-import type { AuthLoginData, AuthLoginErrors, AuthLoginResponses, AuthLogoutData, AuthLogoutErrors, AuthLogoutResponses, AuthRefreshData, AuthRefreshErrors, AuthRefreshResponses, ConfirmInstanceUploadData, ConfirmInstanceUploadErrors, ConfirmInstanceUploadResponses, CreateInstanceData, CreateInstanceDownloadUrlData, CreateInstanceDownloadUrlErrors, CreateInstanceDownloadUrlResponses, CreateInstanceErrors, CreateInstanceResponses, CreateInstanceUploadUrlData, CreateInstanceUploadUrlErrors, CreateInstanceUploadUrlResponses, DeleteInstanceData, DeleteInstanceErrors, DeleteInstanceResponses, GetInstanceData, GetInstanceErrors, GetInstanceResponses, GetMeData, GetMeErrors, GetMeResponses, GetSettingsData, GetSettingsErrors, GetSettingsResponses, ListInstancesData, ListInstancesErrors, ListInstancesResponses, PutSettingsData, PutSettingsErrors, PutSettingsResponses, UpdateInstanceData, UpdateInstanceErrors, UpdateInstanceResponses } from './types.gen';
+import type { AuthLoginData, AuthLoginErrors, AuthLoginResponses, AuthLogoutData, AuthLogoutErrors, AuthLogoutResponses, AuthRefreshData, AuthRefreshErrors, AuthRefreshResponses, ConfirmInstanceUploadData, ConfirmInstanceUploadErrors, ConfirmInstanceUploadResponses, CreateInstanceData, CreateInstanceDownloadUrlData, CreateInstanceDownloadUrlErrors, CreateInstanceDownloadUrlResponses, CreateInstanceErrors, CreateInstanceResponses, CreateInstanceUploadUrlData, CreateInstanceUploadUrlErrors, CreateInstanceUploadUrlResponses, DeleteInstanceData, DeleteInstanceErrors, DeleteInstanceResponses, GetInstanceData, GetInstanceErrors, GetInstanceResponses, GetMeData, GetMeErrors, GetMeResponses, GetMinecraftAccountData, GetMinecraftAccountErrors, GetMinecraftAccountResponses, GetMinecraftAccountsData, GetMinecraftAccountsErrors, GetMinecraftAccountsResponses, GetSettingsData, GetSettingsErrors, GetSettingsResponses, ListInstancesData, ListInstancesErrors, ListInstancesResponses, MinecraftLinkCallbackData, MinecraftLinkCallbackErrors, MinecraftLinkCallbackResponses, MinecraftLinkData, MinecraftLinkErrors, MinecraftLinkResponses, MinecraftRefreshTokenData, MinecraftRefreshTokenErrors, MinecraftRefreshTokenResponses, PutSettingsData, PutSettingsErrors, PutSettingsResponses, UnlinkMinecraftAccountData, UnlinkMinecraftAccountErrors, UnlinkMinecraftAccountResponses, UpdateInstanceData, UpdateInstanceErrors, UpdateInstanceResponses } from './types.gen';
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
      * You can provide a client instance returned by `createClient()` instead of
@@ -28,7 +28,7 @@ export declare const authRefresh: <ThrowOnError extends boolean = false>(options
 /**
  * Start OAuth login
  *
- * Redirects the user's browser to Google or Microsoft to begin the login flow.
+ * Redirects the user's browser to begin the login flow.
  */
 export declare const authLogin: <ThrowOnError extends boolean = false>(options: Options<AuthLoginData, ThrowOnError>) => RequestResult<AuthLoginResponses, AuthLoginErrors, ThrowOnError>;
 /**
@@ -69,6 +69,42 @@ export declare const createInstanceUploadUrl: <ThrowOnError extends boolean = fa
  * Get the current user's profile
  */
 export declare const getMe: <ThrowOnError extends boolean = false>(options?: Options<GetMeData, ThrowOnError>) => RequestResult<GetMeResponses, GetMeErrors, ThrowOnError>;
+/**
+ * Unlink minecraft account
+ *
+ * Unlinks minecraft account from the current user
+ */
+export declare const unlinkMinecraftAccount: <ThrowOnError extends boolean = false>(options: Options<UnlinkMinecraftAccountData, ThrowOnError>) => RequestResult<UnlinkMinecraftAccountResponses, UnlinkMinecraftAccountErrors, ThrowOnError>;
+/**
+ * Get minecraft account
+ *
+ * Returns a minecraft account linked to the current user
+ */
+export declare const getMinecraftAccount: <ThrowOnError extends boolean = false>(options: Options<GetMinecraftAccountData, ThrowOnError>) => RequestResult<GetMinecraftAccountResponses, GetMinecraftAccountErrors, ThrowOnError>;
+/**
+ * Link minecraft account
+ *
+ * Links minecraft account to current user using microsoft oauth
+ */
+export declare const minecraftLink: <ThrowOnError extends boolean = false>(options?: Options<MinecraftLinkData, ThrowOnError>) => RequestResult<MinecraftLinkResponses, MinecraftLinkErrors, ThrowOnError>;
+/**
+ * Refresh minecraft access token
+ *
+ * Refreshes the minecraft access token for the current user
+ */
+export declare const minecraftRefreshToken: <ThrowOnError extends boolean = false>(options: Options<MinecraftRefreshTokenData, ThrowOnError>) => RequestResult<MinecraftRefreshTokenResponses, MinecraftRefreshTokenErrors, ThrowOnError>;
+/**
+ * Get minecraft accounts
+ *
+ * Returns a list of minecraft accounts linked to the current user
+ */
+export declare const getMinecraftAccounts: <ThrowOnError extends boolean = false>(options?: Options<GetMinecraftAccountsData, ThrowOnError>) => RequestResult<GetMinecraftAccountsResponses, GetMinecraftAccountsErrors, ThrowOnError>;
+/**
+ * Minecraft link callback
+ *
+ * Handles redirect from microsoft to obrain tokens
+ */
+export declare const minecraftLinkCallback: <ThrowOnError extends boolean = false>(options?: Options<MinecraftLinkCallbackData, ThrowOnError>) => RequestResult<MinecraftLinkCallbackResponses, MinecraftLinkCallbackErrors, ThrowOnError>;
 /**
  * Get the current user's synced settings
  *

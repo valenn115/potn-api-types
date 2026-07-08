@@ -46,6 +46,8 @@ impl InstanceBody {
 /// 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum ModLoader {
+    #[serde(rename = "vanilla")]
+    Vanilla,
     #[serde(rename = "forge")]
     Forge,
     #[serde(rename = "neoforge")]
@@ -58,7 +60,7 @@ pub enum ModLoader {
 
 impl Default for ModLoader {
     fn default() -> ModLoader {
-        Self::Forge
+        Self::Vanilla
     }
 }
 

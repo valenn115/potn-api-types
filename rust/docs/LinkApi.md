@@ -1,17 +1,19 @@
-# \UserApi
+# \LinkApi
 
 All URIs are relative to *https://api.potnlaunch.xyz*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_me**](UserApi.md#get_me) | **GET** /me | Get the current user's profile
+[**minecraft_link**](LinkApi.md#minecraft_link) | **POST** /minecraft/account/link | Link minecraft account
 
 
 
-## get_me
+## minecraft_link
 
-> models::User get_me()
-Get the current user's profile
+> minecraft_link()
+Link minecraft account
+
+Links minecraft account to current user using microsoft oauth
 
 ### Parameters
 
@@ -19,7 +21,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**models::User**](User.md)
+ (empty response body)
 
 ### Authorization
 
@@ -28,7 +30,7 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/problem+json
+- **Accept**: application/problem+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

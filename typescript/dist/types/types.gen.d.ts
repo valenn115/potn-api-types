@@ -1,5 +1,5 @@
 export type ClientOptions = {
-    baseUrl: 'http://localhost:8080' | (string & {});
+    baseUrl: 'https://api.potnlaunch.xyz' | (string & {});
 };
 export type ErrorDetail = {
     /**
@@ -58,7 +58,7 @@ export type InstanceBody = {
      * Minecraft version, e.g. '1.20.1'
      */
     mc_version: string;
-    mod_loader?: 'forge' | 'neoforge' | 'fabric' | 'quilt';
+    mod_loader?: 'vanilla' | 'forge' | 'neoforge' | 'fabric' | 'quilt';
     /**
      * Loader version, empty for vanilla
      */
@@ -113,6 +113,14 @@ export type LogoutOutputBody = {
      */
     readonly $schema?: string;
     success: boolean;
+};
+export type MinecraftAccount = {
+    created_at: string;
+    id: string;
+    minecraft_uuid: string;
+    updated_at: string;
+    user_id: string;
+    username: string;
 };
 export type PresignOutputBody = {
     /**
@@ -218,7 +226,7 @@ export type InstanceBodyWritable = {
      * Minecraft version, e.g. '1.20.1'
      */
     mc_version: string;
-    mod_loader?: 'forge' | 'neoforge' | 'fabric' | 'quilt';
+    mod_loader?: 'vanilla' | 'forge' | 'neoforge' | 'fabric' | 'quilt';
     /**
      * Loader version, empty for vanilla
      */
@@ -345,11 +353,21 @@ export type AuthRefreshResponses = {
 export type AuthRefreshResponse = AuthRefreshResponses[keyof AuthRefreshResponses];
 export type AuthLoginData = {
     body?: never;
+    headers?: {
+        /**
+         * User agent string
+         */
+        'User-Agent'?: string;
+        /**
+         * IP address of the user
+         */
+        'X-Real-IP'?: string;
+    };
     path: {
         /**
          * OAuth provider to log in with
          */
-        provider: 'google' | 'microsoft';
+        provider: 'google';
     };
     query?: {
         /**
@@ -570,6 +588,136 @@ export type GetMeResponses = {
     200: User;
 };
 export type GetMeResponse = GetMeResponses[keyof GetMeResponses];
+export type UnlinkMinecraftAccountData = {
+    body?: never;
+    path?: never;
+    query: {
+        id: string;
+    };
+    url: '/minecraft/account';
+};
+export type UnlinkMinecraftAccountErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type UnlinkMinecraftAccountError = UnlinkMinecraftAccountErrors[keyof UnlinkMinecraftAccountErrors];
+export type UnlinkMinecraftAccountResponses = {
+    /**
+     * No Content
+     */
+    204: void;
+};
+export type UnlinkMinecraftAccountResponse = UnlinkMinecraftAccountResponses[keyof UnlinkMinecraftAccountResponses];
+export type GetMinecraftAccountData = {
+    body?: never;
+    path?: never;
+    query: {
+        id: string;
+    };
+    url: '/minecraft/account';
+};
+export type GetMinecraftAccountErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type GetMinecraftAccountError = GetMinecraftAccountErrors[keyof GetMinecraftAccountErrors];
+export type GetMinecraftAccountResponses = {
+    /**
+     * No Content
+     */
+    204: void;
+};
+export type GetMinecraftAccountResponse = GetMinecraftAccountResponses[keyof GetMinecraftAccountResponses];
+export type MinecraftLinkData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/minecraft/account/link';
+};
+export type MinecraftLinkErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type MinecraftLinkError = MinecraftLinkErrors[keyof MinecraftLinkErrors];
+export type MinecraftLinkResponses = {
+    /**
+     * No Content
+     */
+    204: void;
+};
+export type MinecraftLinkResponse = MinecraftLinkResponses[keyof MinecraftLinkResponses];
+export type MinecraftRefreshTokenData = {
+    body?: never;
+    path?: never;
+    query: {
+        id: string;
+    };
+    url: '/minecraft/account/refresh';
+};
+export type MinecraftRefreshTokenErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type MinecraftRefreshTokenError = MinecraftRefreshTokenErrors[keyof MinecraftRefreshTokenErrors];
+export type MinecraftRefreshTokenResponses = {
+    /**
+     * OK
+     */
+    200: string;
+};
+export type MinecraftRefreshTokenResponse = MinecraftRefreshTokenResponses[keyof MinecraftRefreshTokenResponses];
+export type GetMinecraftAccountsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/minecraft/accounts';
+};
+export type GetMinecraftAccountsErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type GetMinecraftAccountsError = GetMinecraftAccountsErrors[keyof GetMinecraftAccountsErrors];
+export type GetMinecraftAccountsResponses = {
+    /**
+     * OK
+     */
+    200: Array<MinecraftAccount> | null;
+};
+export type GetMinecraftAccountsResponse = GetMinecraftAccountsResponses[keyof GetMinecraftAccountsResponses];
+export type MinecraftLinkCallbackData = {
+    body?: never;
+    path?: never;
+    query?: {
+        code?: string;
+        state?: string;
+        error?: string;
+    };
+    url: '/minecraft/link/callback';
+};
+export type MinecraftLinkCallbackErrors = {
+    /**
+     * Error
+     */
+    default: ErrorModel;
+};
+export type MinecraftLinkCallbackError = MinecraftLinkCallbackErrors[keyof MinecraftLinkCallbackErrors];
+export type MinecraftLinkCallbackResponses = {
+    /**
+     * No Content
+     */
+    204: void;
+};
+export type MinecraftLinkCallbackResponse = MinecraftLinkCallbackResponses[keyof MinecraftLinkCallbackResponses];
 export type GetSettingsData = {
     body?: never;
     path?: never;
